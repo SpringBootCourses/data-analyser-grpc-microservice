@@ -1,0 +1,47 @@
+version: '3.0'
+
+networks:
+  app:
+    driver: bridge
+
+volumes:
+  db-data:
+    driver: local
+
+services:
+  generator:
+    image: 'ilyalisov/data-generator-grpc-microservice:latest'
+    networks:
+      - app
+    depends_on:
+      - analyser
+    environment:
+      - GRPC_HOST=analyser:${GRPC_PORT}
+    ports:
+      - '8081:8081'
+
+  analyser:
+    image: 'ilyalisov/data-analyser-grpc-microservice:latest'
+    networks:
+      - app
+    depends_on:
+      - postgres
+    environment:
+      - GRPC_PORT=${GRPC_PORT}
+      - HOST=${HOST}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USERNAME=${POSTGRES_USERNAME}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - '8082:8082'
+
+  postgres:
+    image: 'postgres:15.1-alpine'
+    networks:
+      - app
+    env_file:
+      - .env
+    ports:
+      - '5437:5432'
+    volumes:
+      - db-data:/var/lib/postgresql/data
