@@ -1,9 +1,9 @@
 package com.example.dataanalysergrpcmicroservice.service;
 
-import com.example.dataanalysergrpcmicroservice.DataServerGrpc;
-import com.example.dataanalysergrpcmicroservice.Empty;
-import com.example.dataanalysergrpcmicroservice.GRPCData;
 import com.example.dataanalysergrpcmicroservice.model.Data;
+import com.example.grpccommon.DataServerGrpc;
+import com.example.grpccommon.GRPCData;
+import com.google.protobuf.Empty;
 import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
 import net.devh.boot.grpc.server.service.GrpcService;
@@ -20,6 +20,27 @@ public class GRPCDataService extends DataServerGrpc.DataServerImplBase {
         dataService.handle(data);
         responseObserver.onNext(Empty.newBuilder().build());
         responseObserver.onCompleted();
+    }
+
+    @Override
+    public StreamObserver<GRPCData> addStreamOfData(StreamObserver<Empty> responseObserver) {
+        return new StreamObserver<>() {
+            @Override
+            public void onNext(GRPCData grpcData) {
+                Data data = new Data(grpcData);
+                dataService.handle(data);
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+            }
+
+            @Override
+            public void onCompleted() {
+                responseObserver.onNext(Empty.newBuilder().build());
+                responseObserver.onCompleted();
+            }
+        };
     }
 
 }

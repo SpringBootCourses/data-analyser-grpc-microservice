@@ -1,6 +1,6 @@
 package com.example.dataanalysergrpcmicroservice.model;
 
-import com.example.dataanalysergrpcmicroservice.GRPCData;
+import com.example.grpccommon.GRPCData;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

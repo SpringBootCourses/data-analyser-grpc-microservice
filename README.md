@@ -7,6 +7,8 @@ This application receives data
 from [Data generator gRPC service](https://github.com/IlyaLisov/data-generator-grpc-microservice)
 with gRPC.
 
+This application can return data to [Data store gRPC service](https://github.com/IlyaLisov/data-store-grpc-microservice)
+
 ### Usage
 
 To start an application you need to pass variables to `.env` file.
