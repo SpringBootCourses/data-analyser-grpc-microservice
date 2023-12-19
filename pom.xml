@@ -22,7 +22,7 @@
         <java.version>17</java.version>
         <lombok.version>1.18.30</lombok.version>
         <postgresql.version>42.6.0</postgresql.version>
-        <liquibase.version>4.23.2</liquibase.version>
+        <liquibase.version>4.25.1</liquibase.version>
         <grpc.version>1.60.0</grpc.version>
         <protoc.version>3.25.1</protoc.version>
         <protobuf-maven-plugin.version>0.6.1</protobuf-maven-plugin.version>
