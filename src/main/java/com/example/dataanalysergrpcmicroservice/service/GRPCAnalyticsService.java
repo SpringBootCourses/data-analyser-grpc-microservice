@@ -8,12 +8,14 @@ import com.example.grpccommon.MeasurementType;
 import com.google.protobuf.Timestamp;
 import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.server.service.GrpcService;
 
 import java.time.ZoneOffset;
 import java.util.List;
 
 @GrpcService
+@Slf4j
 @RequiredArgsConstructor
 public class GRPCAnalyticsService extends AnalyticsServerGrpc.AnalyticsServerImplBase {
 
@@ -39,7 +41,7 @@ public class GRPCAnalyticsService extends AnalyticsServerGrpc.AnalyticsServerImp
                     .build();
             responseObserver.onNext(dataRequest);
         }
-        System.out.println("Batch was sent.");
+        log.info("Batch was sent.");
         responseObserver.onCompleted();
     }
 
