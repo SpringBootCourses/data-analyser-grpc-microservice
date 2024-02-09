@@ -13,22 +13,14 @@ This application can return data to [Data store gRPC service](https://github.com
 
 To start an application you need to pass variables to `.env` file.
 
+You can use example `.env.example` file with some predefined environments.
+
 You can find Docker compose file in `docker/docker-compose.yaml`.
 
 Application is running on port `8082`.
 
 All insignificant features (checkstyle, build check, dto validation) are not
 presented.
-
-#### Example:
-
-```agsl
-HOST=localhost:5437
-POSTGRES_DB=sensor_data
-POSTGRES_USERNAME=postgres
-POSTGRES_PASSWORD=postgres
-GRPC_PORT=8090
-```
 
 ### Docker
 
